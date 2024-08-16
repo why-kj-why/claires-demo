@@ -122,7 +122,7 @@ def store_ops_app():
 
     st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
 
-    if st.button("STORE"):
+    if st.button("SAVE"):
         if st.session_state.history:
             last_chat = st.session_state.history[-1]
             store_question_in_db(last_chat['question'], last_chat['sql'])
