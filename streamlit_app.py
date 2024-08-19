@@ -123,6 +123,7 @@ def store_ops_app():
     # Claire Purple top bar on Top.
     st.markdown(f"""
     <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000;">
+        <p> Store Ops App </p>
     </div>
     """, unsafe_allow_html=True)
 
