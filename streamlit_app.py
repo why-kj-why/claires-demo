@@ -205,8 +205,6 @@ def store_manager_app():
 
     # Add drop-down menu for stores
     selected_store = st.selectbox("Select a Store", ["Store ID", "STORE023", "STORE095", "STORE246"])
-
-    selected_query = st.selectbox("Select a query", list(queries.keys()))
     
     # UNPIN button functionality
     st.markdown("""
@@ -215,20 +213,23 @@ def store_manager_app():
     </div>
     """, unsafe_allow_html=True)
 
+    selected_query = st.selectbox("Select a query", list(queries.keys()))
+
     if st.button("UNPIN", key='unpin_button'):
         if selected_query != "Select a query":
-            # Remove the query from the database
-            connection = connect_to_db(CONVO_DB_NAME)
-            query = "DELETE FROM pinned_questions WHERE question = %s;"
-            try:
-                with connection.cursor() as cursor:
-                    cursor.execute(query, (selected_query,))
-                connection.commit()
-            finally:
-                connection.close()
+            # # Remove the query from the database
+            # connection = connect_to_db(CONVO_DB_NAME)
+            # query = "DELETE FROM pinned_questions WHERE question = %s;"
+            # try:
+            #     with connection.cursor() as cursor:
+            #         cursor.execute(query, (selected_query,))
+            #     connection.commit()
+            # finally:
+            #     connection.close()
                 
-            # Update the queries dictionary
-            queries = get_queries_from_db()
+            # # Update the queries dictionary
+            # queries = get_queries_from_db()
+            del queries[selected_query]
             st.success(f"Query '{selected_query}' has been removed.")
         else:
             st.warning("Select a query to unpin.")
