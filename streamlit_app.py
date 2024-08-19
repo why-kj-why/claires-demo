@@ -84,31 +84,15 @@ def get_queries_from_db():
 def set_custom_css():
     custom_css = """
     <style>
+    
         .st-emotion-cache-9aoz2h.e1vs0wn30 {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Center-align the DataFrame */
         }
         .st-emotion-cache-9aoz2h.e1vs0wn30 table {
-            margin: 0 auto;
+            margin: 0 auto; /* Center-align the table itself */
         }
-        .star-button {
-            background-color: #fff;
-            border: none;
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: -50px;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-        }
-        .star-button i {
-            color: #FFD700;
-            font-size: 20px;
-        }
-        .star-button:hover {
-            background-color: #FFD700;
-        }
+        
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
