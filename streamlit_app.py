@@ -208,11 +208,18 @@ def store_manager_app():
 
     # Load queries from the database
     if 'queries' not in st.session_state:
-        st.session_state['queries'] = {
+        # st.session_state['queries'] = {
+        #     "Store ID": {"Select a query": None},
+        #     "STORE023": get_queries_from_db(),
+        #     "STORE095": get_queries_from_db(),
+        #     "STORE246": get_queries_from_db()
+        # }
+
+        st.session_state["queries"] = {
             "Store ID": {"Select a query": None},
-            "STORE023": get_queries_from_db(),
-            "STORE095": get_queries_from_db(),
-            "STORE246": get_queries_from_db()
+            "STORE023": {'Select a query': None, 'Compare the sales performance for BRISTOL SUPERSTORE for this year against the previous year': 'SELECT DISTINCT STORE_ID, STORE_NAME, SALES_TY, SALES_LY FROM claires_data.store_total;'},
+            "STORE095": {'Select a query': None, 'Compare the sales performance for CWMBRAN for this year against the previous year': 'SELECT DISTINCT STORE_ID, STORE_NAME, SALES_TY, SALES_LY FROM claires_data.store_total;'},
+            "STORE246": {'Select a query': None, 'Compare the sales performance for GLASGOW BRAEHEAD for this year against the previous year': 'SELECT DISTINCT STORE_ID, STORE_NAME, SALES_TY, SALES_LY FROM claires_data.store_total;'},
         }
 
     st.markdown(f"""
@@ -246,7 +253,7 @@ def store_manager_app():
     </style>
     """, unsafe_allow_html=True)
 
-    unpin_button_pressed = st.button("UNPIN", key='unpin_button')
+    unpin_button_pressed = st.button("DELETE", key='unpin_button')
 
     selected_store = st.selectbox("Select a Store", ["Store ID", "STORE023", "STORE095", "STORE246"])
 
@@ -300,10 +307,11 @@ def store_manager_app():
 set_custom_css()
 
 # Sidebar for toggling between personas
-persona = st.sidebar.radio("Choose Persona:", ("Store Ops", "Store Manager"))
+persona = st.sidebar.radio("Choose Persona:", ("Ask a Question", "Simulate a Store"))
 
 # Load the corresponding persona app
-if persona == "Store Ops":
+if persona == "Ask a Question":
     store_ops_app()
-elif persona == "Store Manager":
+
+elif persona == "Simulate a Store":
     store_manager_app()
