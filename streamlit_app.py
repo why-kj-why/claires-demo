@@ -91,6 +91,24 @@ def set_custom_css():
         .st-emotion-cache-9aoz2h.e1vs0wn30 table {
             margin: 0 auto;
         }
+        .star-button {
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: -50px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+        .star-button i {
+            color: #FFD700;
+            font-size: 20px;
+        }
+        .star-button:hover {
+            background-color: #FFD700;
+        }
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
@@ -133,6 +151,13 @@ def store_ops_app():
             st.session_state['last_nlr'] = None
         else:
             st.warning("No conversation to store.")
+
+    # Inject HTML for star button
+    st.markdown("""
+    <button class="star-button">
+        <i class="fas fa-star"></i>
+    </button>
+    """, unsafe_allow_html=True)
 
     if st.session_state['user_input']:
         st.session_state.history.append({
@@ -183,6 +208,8 @@ def store_manager_app():
     </h4>
     """, unsafe_allow_html=True)
 
+    selected_store = st.selectbox("Select a Store", ["STORE01", "STORE02", "STORE03"])
+
     selected_query = st.selectbox("Select a query", list(queries.keys()))
     if selected_query and selected_query != "Select a query":
         query_sql = queries[selected_query]
@@ -195,7 +222,7 @@ For example, stores like BRISTOL SUPERSTORE, CWMBRAN, and CARDIFF have seen an i
 It is also interesting to note that some stores have had significant changes in sales performance. For instance, stores like West End New, Budapest Arena Plaza, and Arkad Budapest have experienced a significant increase in sales this year compared to the previous year. Conversely, stores like Budapest Vaci Utca and Gyor Arkad have seen a significant decrease in sales.\n\n
 Overall, the data table provides a comparison of sales performance across all stores for this year against the previous year, highlighting the varying trends in sales for different stores.        
 """)
-        st.dataframe(result, height=300)
+        # st.dataframe(result, height=300)
 
 # Main Application
 set_custom_css()
