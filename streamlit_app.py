@@ -4,7 +4,6 @@ import pandas as pd
 import pymysql
 import time
 import plotly.express as px
-from streamlit_option_menu import option_menu
 
 # Database Configuration
 DB_HOST = "tellmoredb.cd24ogmcy170.us-east-1.rds.amazonaws.com"
@@ -225,7 +224,7 @@ For example, stores like BRISTOL SUPERSTORE, CWMBRAN, and CARDIFF have seen an i
 It is also interesting to note that some stores have had significant changes in sales performance. For instance, stores like West End New, Budapest Arena Plaza, and Arkad Budapest have experienced a significant increase in sales this year compared to the previous year. Conversely, stores like Budapest Vaci Utca and Gyor Arkad have seen a significant decrease in sales.\n\n
 Overall, the data table provides a comparison of sales performance across all stores for this year against the previous year, highlighting the varying trends in sales for different stores.        
 """)
-        st.dataframe(result, height=300)
+        # st.dataframe(result, height=300)
 
 # Main Application
 set_custom_css()
