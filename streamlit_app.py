@@ -4,7 +4,6 @@ import pandas as pd
 import pymysql
 import time
 import plotly.express as px
-from streamlit_option_menu import option_menu
 
 # Database Configuration
 DB_HOST = "tellmoredb.cd24ogmcy170.us-east-1.rds.amazonaws.com"
