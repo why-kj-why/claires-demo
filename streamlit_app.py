@@ -115,10 +115,8 @@ def store_ops_app():
     # """, unsafe_allow_html=True)
 
     st.markdown(f"""
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000; display: flex; align-items: center; justify-content: center;">
-    <span style="color: white; font-size: 24px; font-weight: bold;">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
         STORE OPS APP
-    </span>
     </div>
     """, unsafe_allow_html=True)
 
