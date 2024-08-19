@@ -201,10 +201,10 @@ Overall, the data table provides a comparison of sales performance across all st
 set_custom_css()
 
 # Sidebar for toggling between personas
-persona = st.sidebar.radio("Choose Persona:", ("Store Ops", "Store Manager"))
+persona = st.sidebar.radio("Choose Persona:", ("Ask a Question", "Stimulate a Store"))
 
 # Load the corresponding persona app
-if persona == "Store Ops":
+if persona == "Ask a Question":
     store_ops_app()
-else:
+elif persona == "Stimulate a Store":
     store_manager_app()
