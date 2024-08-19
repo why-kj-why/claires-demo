@@ -127,8 +127,8 @@ def store_ops_app():
     # """, unsafe_allow_html=True)
 
     st.markdown(f"""
-    <h4 style="top: 0; background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px;">
-        Store Ops App
+    <h4 style="background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px;">
+        Ask a Question
     </h4>
     """, unsafe_allow_html=True)
 
@@ -205,7 +205,7 @@ def store_manager_app():
 
     st.markdown(f"""
     <h4 style="background-color: {CLAIRE_MAUVE}; color: black; padding: 10px;">
-        Store Management App
+        Simulate a Store
     </h4>
     """, unsafe_allow_html=True)
 
@@ -249,10 +249,10 @@ def store_manager_app():
 set_custom_css()
 
 # Sidebar for toggling between personas
-persona = st.sidebar.radio("Choose Persona:", ("Ask a Question", "Stimulate a Store"))
+persona = st.sidebar.radio("Choose Persona:", ("Store Ops", "Store Manager"))
 
 # Load the corresponding persona app
-if persona == "Ask a Question":
+if persona == "Store Ops":
     store_ops_app()
-elif persona == "Stimulate a Store":
+elif persona == "Store Manager":
     store_manager_app()
