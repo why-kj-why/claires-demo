@@ -4,6 +4,7 @@ import pandas as pd
 import pymysql
 import time
 import plotly.express as px
+from streamlit_option_menu import option_menu
 
 # Database Configuration
 DB_HOST = "tellmoredb.cd24ogmcy170.us-east-1.rds.amazonaws.com"
@@ -115,7 +116,7 @@ def set_custom_css():
 
 # Merge App Functionality
 def store_ops_app():
-    #Load the logo 
+    # Load the logo
     with open(r'Claires_logo.svg', 'r') as image:
         image_data = image.read()
     st.logo(image=image_data)
@@ -138,9 +139,8 @@ def store_ops_app():
         st.write(f"**User:** {chat['question']}")
         st.write(f"**Natural Language Response:** {chat['nlr']}")
 
-    st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
-
-    if st.button("SAVE"):
+    # Position the star button above the chat box
+    if st.button('SAVE', key='save_button'):
         if st.session_state.history:
             last_chat = st.session_state.history[-1]
             store_question_in_db(last_chat['question'], last_chat['sql'])
@@ -158,6 +158,8 @@ def store_ops_app():
         <i class="fas fa-star"></i>
     </button>
     """, unsafe_allow_html=True)
+
+    st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
 
     if st.session_state['user_input']:
         st.session_state.history.append({
@@ -183,7 +185,7 @@ Overall, the data table provides a comparison of sales performance across all st
         st.write(st.session_state['last_nlr'])
 
 def store_manager_app():
-    #Load the logo 
+    # Load the logo
     with open(r'Claires_logo.svg', 'r') as image:
         image_data = image.read()
     st.logo(image=image_data)
@@ -208,6 +210,7 @@ def store_manager_app():
     </h4>
     """, unsafe_allow_html=True)
 
+    # Add drop-down menu for stores
     selected_store = st.selectbox("Select a Store", ["STORE01", "STORE02", "STORE03"])
 
     selected_query = st.selectbox("Select a query", list(queries.keys()))
