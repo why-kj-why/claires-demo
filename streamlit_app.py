@@ -127,7 +127,7 @@ def store_ops_app():
     # """, unsafe_allow_html=True)
 
     st.markdown(f"""
-    <h4 style="position: fixed; top: 0; left: 50; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px; z-index: 1000;">
+    <h4 style="background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px;">
         Store Ops App
     </h4>
     """, unsafe_allow_html=True)
