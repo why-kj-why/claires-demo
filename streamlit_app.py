@@ -218,16 +218,19 @@ def store_manager_app():
         # conn = connect_to_db(DB_NAME)
         # result = execute_query(query_sql, conn)
         if selected_store == "STORE023":
+            time.sleep(1)
             st.markdown("""
             The data table returned reports on the sales performance of STORE023 - BRISTOL SUPERSTORE for this year and the previous year.\n\nThe BRISTOL SUPERSTORE branch has seen a 3.6% increase in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
 """)
 
         elif selected_store == "STORE095":
+            time.sleep(1)
             st.markdown("""
             The data table returned reports on the sales performance of STORE095 - CWMBRAN for this year and the previous year.\n\nThe CWMBRAN branch has seen a 8.2% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
 """)
 
         elif selected_store == "STORE246":
+            time.sleep(1)
             st.markdown("""
             The data table returned reports on the sales performance of STORE246 - GLASGOW BRAEHEAD for this year and the previous year.\n\nThe GLASGOW BRAEHEAD branch has seen a 8.8% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
 """)
