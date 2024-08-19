@@ -80,11 +80,9 @@ def get_queries_from_db():
     questions.update(dict(zip(df['question'], df['sql_query'])))
     return questions
 
-# Set custom CSS for the application
 def set_custom_css():
     custom_css = """
     <style>
-    
         .st-emotion-cache-9aoz2h.e1vs0wn30 {
             display: flex;
             justify-content: center; /* Center-align the DataFrame */
@@ -92,10 +90,22 @@ def set_custom_css():
         .st-emotion-cache-9aoz2h.e1vs0wn30 table {
             margin: 0 auto; /* Center-align the table itself */
         }
-        
+
+        .save-button-container {
+            display: flex;
+            justify-content: flex-end; /* Align button to the right */
+            margin-top: 10px;
+        }
+
+        .save-button-container button {
+            border-radius: 50%;
+            background-color: #553D94; /* Button color */
+            color: white;
+        }
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
+
 
 # Merge App Functionality
 def store_ops_app():
@@ -122,6 +132,12 @@ def store_ops_app():
         st.write(f"**User:** {chat['question']}")
         st.write(f"**Natural Language Response:** {chat['nlr']}")
 
+    st.markdown("""
+    <div class="save-button-container">
+        <button class="save-button">SAVE</button>
+    </div>
+    """, unsafe_allow_html=True)
+
     # Position the star button above the chat box
     if st.button('SAVE', key='save_button'):
         if st.session_state.history:
@@ -134,13 +150,6 @@ def store_ops_app():
             st.session_state['last_nlr'] = None
         else:
             st.warning("No conversation to store.")
-
-    # Inject HTML for star button
-    st.markdown("""
-    <button class="star-button">
-        <i class="fas fa-star"></i>
-    </button>
-    """, unsafe_allow_html=True)
 
     st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
 
@@ -173,11 +182,6 @@ def store_manager_app():
         image_data = image.read()
     st.logo(image=image_data)
 
-    st.markdown(f"""
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000;">
-    </div>
-    """, unsafe_allow_html=True)
-
     queries = get_queries_from_db()
     result = None
 
@@ -197,10 +201,27 @@ def store_manager_app():
     selected_store = st.selectbox("Select a Store", ["Store ID", "STORE023", "STORE095", "STORE246"])
 
     selected_query = st.selectbox("Select a query", list(queries.keys()))
+    
+    # UNPIN button functionality
+    if st.button("UNPIN"):
+        if selected_query != "Select a query":
+            # Remove the query from the database
+            connection = connect_to_db(CONVO_DB_NAME)
+            query = "DELETE FROM pinned_questions WHERE question = %s;"
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute(query, (selected_query,))
+                connection.commit()
+            finally:
+                connection.close()
+                
+            # Update the queries dictionary
+            queries = get_queries_from_db()
+            st.success(f"Query '{selected_query}' has been removed.")
+        else:
+            st.warning("Select a query to unpin.")
+
     if selected_store and selected_query and selected_query != "Select a query" and selected_store != "Store ID":
-        # query_sql = queries[selected_query]
-        # conn = connect_to_db(DB_NAME)
-        # result = execute_query(query_sql, conn)
         if selected_store == "STORE023":
             time.sleep(1)
             st.markdown("""
@@ -210,15 +231,14 @@ def store_manager_app():
         elif selected_store == "STORE095":
             time.sleep(1)
             st.markdown("""
-            The data table returned reports on the sales performance of STORE095 - CWMBRAN for this year and the previous year.\n\nThe CWMBRAN branch has seen a 8.2% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
+            The data table returned reports on the sales performance of STORE095 - CWMBRAN for this year and the previous year.\n\nThe CWMBRAN branch has seen an 8.2% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
 """)
 
         elif selected_store == "STORE246":
             time.sleep(1)
             st.markdown("""
-            The data table returned reports on the sales performance of STORE246 - GLASGOW BRAEHEAD for this year and the previous year.\n\nThe GLASGOW BRAEHEAD branch has seen a 8.8% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
+            The data table returned reports on the sales performance of STORE246 - GLASGOW BRAEHEAD for this year and the previous year.\n\nThe GLASGOW BRAEHEAD branch has seen an 8.8% decrease in annual sales this year.\n\nThe average increase in sales for all Claire's Accessories stores this year has been: -1.19%\n
 """)
-
 
 #         st.markdown("""
 # The data table returned provides information on the sales performance of different stores for this year and the previous year. The table includes columns such as STORE_ID, STORE_NAME, SALES_TY (sales for this year), and SALES_LY (sales for the previous year).\n\n
