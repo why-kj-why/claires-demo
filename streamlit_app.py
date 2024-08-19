@@ -91,23 +91,29 @@ def set_custom_css():
             margin: 0 auto; /* Center-align the table itself */
         }
 
-        .save-button-container {
+        .button-container {
             display: flex;
             justify-content: flex-end; /* Align button to the right */
             margin-top: 10px;
         }
 
-        .save-button-container button {
+        .circular-button {
             border-radius: 50%;
             background-color: #553D94; /* Button color */
             color: white;
+            border: none;
+            padding: 10px 15px; /* Adjust size as needed */
+            cursor: pointer;
+        }
+
+        .circular-button:hover {
+            background-color: #452a7f; /* Slightly darker shade on hover */
         }
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
 
 
-# Merge App Functionality
 def store_ops_app():
     # Load the logo
     with open(r'Claires_logo.svg', 'r') as image:
@@ -203,7 +209,13 @@ def store_manager_app():
     selected_query = st.selectbox("Select a query", list(queries.keys()))
     
     # UNPIN button functionality
-    if st.button("UNPIN"):
+    st.markdown("""
+    <div class="button-container">
+        <button class="circular-button">UNPIN</button>
+    </div>
+    """, unsafe_allow_html=True)
+
+    if st.button("UNPIN", key='unpin_button'):
         if selected_query != "Select a query":
             # Remove the query from the database
             connection = connect_to_db(CONVO_DB_NAME)
