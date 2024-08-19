@@ -141,17 +141,18 @@ def store_ops_app():
         justify-content: flex-end; /* Align button to the right */
         margin-top: 10px;
     }
-
-    div.stButton > button:first-child {
-        border-radius: 50%;
-        background-color: #553D94; /* Button color */
-        color: white;
-        border: none;
-        padding: 10px 15px; /* Adjust size as needed */
-        cursor: pointer;
-    }
-    </style>
     """, unsafe_allow_html=True)
+
+    # div.stButton > button:first-child {
+    #     border-radius: 50%;
+    #     background-color: #553D94; /* Button color */
+    #     color: white;
+    #     border: none;
+    #     padding: 10px 15px; /* Adjust size as needed */
+    #     cursor: pointer;
+    # }
+    # </style>
+    # """, unsafe_allow_html=True)
 
     # Check if the SAVE button is pressed
     save_button_pressed = st.button('SAVE', key='save_button')
@@ -173,7 +174,7 @@ def store_ops_app():
         st.write(f"**User:** {chat['question']}")
         st.write(f"**Natural Language Response:** {chat['nlr']}")
 
-    st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
+    st.session_state['user_input'] = st.text_input("Business Question: ", st.session_state['user_input'])
 
     # Only process new input if SAVE wasn't just pressed
     if st.session_state['user_input'] and not save_button_pressed:
@@ -234,6 +235,25 @@ def store_manager_app():
     </h4>
     """, unsafe_allow_html=True)
 
+    # st.markdown("""
+    # <style>
+    # div.stButton {
+    #     display: flex;
+    #     justify-content: flex-end; /* Align button to the right */
+    #     margin-top: 10px;
+    # }
+
+    # div.stButton > button:first-child {
+    #     border-radius: 50%;
+    #     background-color: #553D94; /* Button color */
+    #     color: white;
+    #     border: none;
+    #     padding: 10px 15px; /* Adjust size as needed */
+    #     cursor: pointer;
+    # }
+    # </style>
+    # """, unsafe_allow_html=True)
+
     st.markdown("""
     <style>
     div.stButton {
@@ -241,16 +261,6 @@ def store_manager_app():
         justify-content: flex-end; /* Align button to the right */
         margin-top: 10px;
     }
-
-    div.stButton > button:first-child {
-        border-radius: 50%;
-        background-color: #553D94; /* Button color */
-        color: white;
-        border: none;
-        padding: 10px 15px; /* Adjust size as needed */
-        cursor: pointer;
-    }
-    </style>
     """, unsafe_allow_html=True)
 
     unpin_button_pressed = st.button("DELETE", key='unpin_button')
@@ -307,7 +317,7 @@ def store_manager_app():
 set_custom_css()
 
 # Sidebar for toggling between personas
-persona = st.sidebar.radio("Choose Persona:", ("Ask a Question", "Simulate a Store"))
+persona = st.sidebar.radio("", ("Ask a Question", "Simulate a Store"))
 
 # Load the corresponding persona app
 if persona == "Ask a Question":
