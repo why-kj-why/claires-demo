@@ -4,6 +4,7 @@ import pandas as pd
 import pymysql
 import time
 import plotly.express as px
+from streamlit_option_menu import option_menu
 
 # Database Configuration
 DB_HOST = "tellmoredb.cd24ogmcy170.us-east-1.rds.amazonaws.com"
@@ -91,52 +92,45 @@ def set_custom_css():
         .st-emotion-cache-9aoz2h.e1vs0wn30 table {
             margin: 0 auto;
         }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #553D94;
-            color: white;
-            padding: 10px;
-        }
-        .header-title {
-            margin: 0;
-        }
         .star-button {
-            background-color: #FFD700;
+            background-color: #fff;
             border: none;
             cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: -50px;
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .star-button i {
-            color: #fff;
+            color: #FFD700;
             font-size: 20px;
         }
         .star-button:hover {
-            background-color: #FFC107;
+            background-color: #FFD700;
         }
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
 
+# Merge App Functionality
 def store_ops_app():
     # Load the logo
     with open(r'Claires_logo.svg', 'r') as image:
         image_data = image.read()
-    st.markdown(f"<img src='data:image/svg+xml;base64,{image_data}' class='logo'/>", unsafe_allow_html=True)
+    st.logo(image=image_data)
+
+    # Claire Purple top bar on Top.
+    st.markdown(f"""
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000;">
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown(f"""
-    <div class="header-container">
-        <h4 class="header-title">Store Ops App</h4>
-        <button class="star-button" onclick="document.querySelector('.stButton').click();">
-            <i class="fas fa-star"></i>
-        </button>
-    </div>
+    <h4 style="background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px;">
+        Store Ops App
+    </h4>
     """, unsafe_allow_html=True)
 
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
@@ -157,6 +151,13 @@ def store_ops_app():
             st.session_state['last_nlr'] = None
         else:
             st.warning("No conversation to store.")
+
+    # Inject HTML for star button
+    st.markdown("""
+    <button class="star-button">
+        <i class="fas fa-star"></i>
+    </button>
+    """, unsafe_allow_html=True)
 
     st.session_state['user_input'] = st.text_input("You: ", st.session_state['user_input'])
 
@@ -187,17 +188,27 @@ def store_manager_app():
     # Load the logo
     with open(r'Claires_logo.svg', 'r') as image:
         image_data = image.read()
-    st.markdown(f"<img src='data:image/svg+xml;base64,{image_data}' class='logo'/>", unsafe_allow_html=True)
+    st.logo(image=image_data)
 
     st.markdown(f"""
-    <div class="header-container">
-        <h4 class="header-title">North Riverside Park Mall, Store001</h4>
-        <h4 class="header-title">Store Management App</h4>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100px; background-color: {CLAIRE_DEEP_PURPLE}; z-index: 1000;">
     </div>
     """, unsafe_allow_html=True)
 
     queries = get_queries_from_db()
     result = None
+
+    st.markdown(f"""
+    <h4 style="background-color: {CLAIRE_DEEP_PURPLE}; color: white; padding: 10px;">
+        North Riverside Park Mall, Store001
+    </h4>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <h4 style="background-color: {CLAIRE_MAUVE}; color: black; padding: 10px;">
+        Store Management App
+    </h4>
+    """, unsafe_allow_html=True)
 
     # Add drop-down menu for stores
     selected_store = st.selectbox("Select a Store", ["STORE01", "STORE02", "STORE03"])
