@@ -266,7 +266,7 @@ def store_manager_app():
     </style>
     """, unsafe_allow_html=True)
 
-    unpin_button_pressed = st.button(":material/delete:", key='unpin_button') #replace with 'materail/keep_off' for unpin
+    unpin_button_pressed = st.button(":material/delete: DELETE", key='unpin_button') #replace with 'materail/keep_off' for unpin
 
     selected_store = st.selectbox("Select a Store", ["Store ID", "STORE023", "STORE095", "STORE246"])
 
