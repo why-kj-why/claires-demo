@@ -139,8 +139,10 @@ def store_ops_app():
     div.stButton {
         display: flex;
         justify-content: flex-end; /* Align button to the right */
+        font-size: 30px; /* Increase font size */
         margin-top: 10px;
     }
+    </style>
     """, unsafe_allow_html=True)
 
     # div.stButton > button:first-child {
@@ -155,7 +157,7 @@ def store_ops_app():
     # """, unsafe_allow_html=True)
 
     # Check if the SAVE button is pressed
-    save_button_pressed = st.button('SAVE', key='save_button')
+    save_button_pressed = st.button(':material/save: SAVE', key='save_button') # Replace with 'material/save (for save) or 'material/pin (for pin)
 
     if save_button_pressed:
         if st.session_state.history:
@@ -261,9 +263,10 @@ def store_manager_app():
         justify-content: flex-end; /* Align button to the right */
         margin-top: 10px;
     }
+    </style>
     """, unsafe_allow_html=True)
 
-    unpin_button_pressed = st.button("DELETE", key='unpin_button')
+    unpin_button_pressed = st.button(":material/delete:", key='unpin_button') #replace with 'materail/keep_off' for unpin
 
     selected_store = st.selectbox("Select a Store", ["Store ID", "STORE023", "STORE095", "STORE246"])
 
